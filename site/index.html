@@ -7,8 +7,8 @@ layout: false
 <title>Rico's Filler text generator</title>
 <meta http-equiv="Content-Type"		content="text/html; charset=ISO-8859-1" />
 <meta http-equiv="Content-Language"	content="en-us" />
-<script type="text/javascript" src="script.js"></script>
-<link rel="stylesheet" href="assets/style.css" type="text/css" media="screen" charset="utf-8" />
+<script type="text/javascript" src="<%= path_for 'script.js' %>"></script>
+<link rel="stylesheet" href="<%= path_for 'assets/style.css' %>" type="text/css" media="screen" charset="utf-8" />
 <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
 <%= partial :'_google_analytics' %>
 </head>
@@ -25,11 +25,11 @@ layout: false
         <div id="option-language" class="option-item">
         <label for="optGen">Language:</label>
         <select id="optGen">
-          <option value="latin" selected="1">lorem ipsum</option>
-          <option value="english">english</option>
-          <option value="jabberwock">jabberwock</option>
-          <option value="chorva">chorvaloo</option>
-          <option value="tagalog">tagalog</option>
+          <option value="latin" selected="1">Boring ipsum</option>
+          <option value="english">English</option>
+          <option value="jabberwock">Jabberwockian</option>
+          <option value="chorva">Chorvaloo</option>
+          <option value="tagalog">Tagalog</option>
         </select>
       </div>
         
