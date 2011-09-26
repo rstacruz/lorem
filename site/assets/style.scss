@@ -68,8 +68,8 @@ a {
 #text-area::before {
   content: '“';
   position: absolute;
-  font-size: 5em;
-  top: 30px;
+  font-size: 7em;
+  top: 45px;
   left: 10px;
   width: 50px;
   text-align: center;
@@ -138,7 +138,25 @@ textarea {
 
 // Bonggacious!
 body.chorva #text-area {
-  background: saturate(#ddd0d7 * 1.12, 80%); }
+  $pink: saturate(#ddd0d7 * 1.12, 80%);
+  @include background(linear-gradient(top, $pink * 1.05, $pink)); }
+
+body.chorva #text-area::after {
+  content: '';
+  width: 82px * .87;
+  height: 121px * .87;
+  display: block;
+  opacity: 0;
+  position: absolute;
+  bottom: -2px;
+  left: -23px;
+  @include transition-property(opacity);
+  @include transition-duration(1s);
+  background-size: 100%;
+  background: url(kuya-dick.png) no-repeat; }
+
+body.chorva #text-area:hover::after {
+  opacity: 1; }
 
 body.chorva #head h1::after {
   content: '...chos!';
@@ -150,5 +168,6 @@ body.chorva #head h1::after {
 // LOL
 #head #controls #option-count, #option-length label {
   display: none; }
+
 #option-length::before {
   content: '···'; margin-left: -5px; margin-right: 5px; }
