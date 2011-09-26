@@ -146,7 +146,7 @@ body.chorva #text-area::after {
   width: 82px * .87;
   height: 121px * .87;
   display: block;
-  opacity: 0;
+  opacity: 1;
   position: absolute;
   bottom: -2px;
   left: -23px;
@@ -154,9 +154,6 @@ body.chorva #text-area::after {
   @include transition-duration(1s);
   background-size: 100%;
   background: url(kuya-dick.png) no-repeat; }
-
-body.chorva #text-area:hover::after {
-  opacity: 1; }
 
 body.chorva #head h1::after {
   content: '...chos!';
