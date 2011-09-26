@@ -916,8 +916,14 @@ function btnGenerate_onClick()
 	  case 'chorva':    gen = new ChorvaGenerator();  break;
 	  default:   		    gen = new EnglishGenerator();  break;
 	}
-	
-  window.location.hash = '#' + $('optGen').value;
+
+  // Change the permalink
+  if ($('optGen').value == 'latin')
+    { window.location.hash = ''; }
+  else
+    { window.location.hash = '#' + $('optGen').value; }
+
+  document.body.className = $('optGen').value;
 
 	f = gen.generate({
 		paraCount:  $('optParaCount').value,

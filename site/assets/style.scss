@@ -36,11 +36,12 @@ a {
 
   h1 {
     float: left;
-    color: #999;
+    color: saturate(#909a9f, 10%);
     text-shadow: 1px 1px 0 rgba(white, 0.8);
     font-weight: bold;
     margin: 0;
     padding: 0;
+    margin-left: 10px;
     font-size: 1.3em; }
 
   h1, #controls {
@@ -134,6 +135,17 @@ textarea {
     @include box-shadow(0 1px 1px rgba(black, 0.2));
     color: #d0eeee; }
 }
+
+// Bonggacious!
+body.chorva #text-area {
+  background: saturate(#ddd0d7 * 1.12, 80%); }
+
+body.chorva #head h1::after {
+  content: '...chos!';
+  margin-left: 5px;
+  font-weight: normal;
+  font-size: 1.1em;
+  font-family: yellowtail, sans-serif; }
 
 // LOL
 #head #controls #option-count, #option-length label {
