@@ -1,0 +1,142 @@
+@import 'compass/css3';
+@import 'compass/utilities';
+
+body {
+  color: #333;
+  font-size: 11pt;
+  line-height: 1.5;
+  background: #333 url(fabric.jpg); }
+
+body, textarea {
+  font-family: 'pt sans', sans-serif; }
+
+html, body {
+  margin: 0; padding: 0; }
+
+a {
+  color: #7bd;
+  text-decoration: none; }
+
+#all {
+  @include box-shadow(0 2px 3px rgba(black, 0.2));
+  @include border-radius(2px);
+  width: 600px;
+  padding: 20px;
+  margin: 30px auto;
+  background: #fdfdfa; }
+
+#head {
+  text-align: left;
+  @include background(linear-gradient(top, #fafafa, #eee));
+  border-bottom: solid 1px #aaa;
+  margin: -20px -20px -20px -20px;
+  @include border-top-radius(4px);
+  padding: 10px;
+  overflow: hidden;
+
+  h1 {
+    float: left;
+    color: #999;
+    text-shadow: 1px 1px 0 rgba(white, 0.8);
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    font-size: 1.3em; }
+
+  h1, #controls {
+    line-height: 40px; }
+
+  #controls {
+    text-align: left;
+    font-size: 0.8em;
+    float: right;
+
+    .option-item {
+      margin: 0 5px;
+      display: inline-block; } } }
+
+#text-area {
+  background: saturate(#d0d8dd * 1.1, 40%);
+  border-top: solid 1px rgba(black, 0.1);
+  border-bottom: solid 1px rgba(black, 0.1);
+  position: relative;
+  margin: 20px -20px;
+  padding: 20px;
+  padding-right: 10px; }
+
+#text-area::before {
+  content: '“';
+  position: absolute;
+  font-size: 5em;
+  top: 30px;
+  left: 10px;
+  width: 50px;
+  text-align: center;
+  height: 50px;
+  line-height: 50px;
+  color: #999; }
+
+textarea {
+  width: 100%;
+  @include box-sizing(border-box);
+  @include border-radius(4px);
+  @include box-shadow(1px 1px 0 rgba(white, 0.2));
+  height: 500px;
+  border: 0;
+  background: transparent;
+  text-shadow: 1px 1px 0 rgba(white, 0.3);
+  padding-right: 50px;
+  padding-left: 50px;
+  font-size: 1em;
+  line-height: 1.6;
+  resize: none;
+
+  &:first-line {
+    font-weight: bold; }
+
+  &:focus {
+    outline: 0; }
+
+  &::-webkit-scrollbar {  
+    height: 15px; width: 15px; }
+
+  &::-webkit-scrollbar-track {  
+    @include border-radius(8px);
+    @include box-shadow(inset 0 0 3px rgba(black, 0.8));
+    background: rgba(white, 0.5); }
+
+  &::-webkit-scrollbar-thumb {  
+    border-width: 7px 7px 7px 7px;
+    -webkit-border-image: url(scroll-dark.png) 7 7 7 7 round round;
+  } }
+
+#more-controls {
+  margin: -20px;
+  padding: 10px 20px;
+  color: #aaa;
+  font-size: 0.8em;
+  text-align: center;
+  text-shadow: 1px 1px 0 rgba(white, 0.9);
+  @include background(linear-gradient(top, #eee, #ccc));
+  @include border-bottom-radius(4px);
+  border-top: solid 1px #aaa;
+
+  a {
+    margin: 0 5px;
+    padding: 1px 7px;
+    font-weight: bold;
+    color: #555; }
+
+  a:hover {
+    background: #358;
+    @include border-radius(3px);
+    text-shadow: 1px 1px 0 rgba(black, 0.4);
+    @include box-shadow(0 1px 1px rgba(black, 0.2));
+    color: #d0eeee; }
+}
+
+// LOL
+#head #controls #option-count, #option-length label {
+  display: none; }
+#option-length::before {
+  content: '···'; margin-left: -5px; margin-right: 5px; }
