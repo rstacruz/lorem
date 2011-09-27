@@ -1,5 +1,5 @@
 (function() {
-  var ChorvaGenerator, EnglishGenerator, Generator, Generators, JabberwockGenerator, LatinGenerator, Sham, TagalogGenerator, c, cache, capitalize, join, methods, periodize, pick, pluralize, punctuation, r, rand, sentencize, _;
+  var ChorvaGenerator, EnglishGenerator, Generator, Generators, JabberwockGenerator, LatinGenerator, LolGenerator, Sham, TagalogGenerator, c, cache, capitalize, ingize, join, methods, pastize, periodize, pick, pluralize, punctuation, r, rand, sentencize, _;
   var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; }, __slice = Array.prototype.slice, __hasProp = Object.prototype.hasOwnProperty, __extends = function(child, parent) {
     for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; }
     function ctor() { this.constructor = child; }
@@ -87,6 +87,26 @@
       return "" + str + "es";
     } else {
       return "" + str + "s";
+    }
+  };
+  pastize = function(str) {
+    if (str.length === 0) {
+      return str;
+    }
+    if ('aoeui'.indexOf(str.substr(str.length - 1)) > -1) {
+      return "" + str + "d";
+    } else {
+      return "" + str + "ed";
+    }
+  };
+  ingize = function(str) {
+    if (str.length === 0) {
+      return str;
+    }
+    if ('aoeui'.indexOf(str.substr(str.length - 1)) > -1) {
+      return "" + (str.substr(0, str.length - 1)) + "ing";
+    } else {
+      return "" + str + "ing";
     }
   };
   Generator = (function() {
@@ -219,7 +239,6 @@
     EnglishGenerator.prototype.SENTENCE_EXCLAMATION = EnglishGenerator.phrase(function() {
       return ['EXCLAMATION', c(30) ? [',', 'my', c(50) ? [c(50) ? ['ADJECTIVE', ','] : void 0, 'ADJECTIVE'] : void 0, 'NP'] : void 0, '!'];
     });
-    EnglishGenerator.prototype.EXCLAMATION = EnglishGenerator.words(["egads", "alas", "oh no", "yes", "indeed", "never"]);
     EnglishGenerator.prototype.QUESTION = EnglishGenerator.randomize(function() {
       return [
         [
@@ -329,9 +348,13 @@
       return pluralize(this.TRANSITIVE());
     };
     EnglishGenerator.prototype.NOUN = EnglishGenerator.words(['depth', 'sense', 'touch', 'farce', 'sight', 'vision', 'height', 'balance', 'pitch', 'scion', 'might', 'store', 'funk', 'worm', 'coffee', 'bean', 'ice', 'salad', 'finger', 'chicken', 'dog', 'cat', 'mouse', 'trunk', 'pond', 'chain', 'liquid', 'shift', 'fiber', 'dilemma', 'clock', 'past', 'rain', 'cap', 'key', 'string', 'bill', 'rod', 'outline', 'hour', 'period', 'time', 'number', 'section', 'state', 'page', 'content', 'surface', 'work', 'comment', 'acuse', 'support', 'postcard', 'sheet', 'paper', 'phone', 'mail', 'gravy', 'sauce', 'gas', 'insect', 'claw', 'powder', 'plastic', 'seed', 'leaf', 'bridge', 'home', 'flake', 'art', 'pail', 'crown', 'elephant', 'sky', 'vodka', 'gin', 'tonic', 'grin', 'smile', 'valley', 'threat', 'boss', 'employee', 'heart', 'head', 'fingernail', 'aquarium', 'forest', 'science', 'accessory', 'spinach', 'tofu', 'hamburger', 'teddy bear', 'shotglass', 'cola', 'applesauce', 'cinnamon', 'lucky charm', 'towel']);
+    EnglishGenerator.prototype.EXCLAMATION = EnglishGenerator.words(["egads", "alas", "oh no", "yes", "indeed", "never"]);
     EnglishGenerator.prototype.PLACE = EnglishGenerator.words(['kitchen', 'hall', 'school', 'zoo', 'local library', 'camp', 'stadium', 'workplace', 'countryside', 'courtyard', 'balcony', 'porch', 'backpack', 'bag', 'knapsack', 'gullet', 'stomach', 'river']);
     EnglishGenerator.prototype.ADJECTIVE = EnglishGenerator.words(['conventional', 'sequential', 'not quite', 'chocolate', 'hazardous', 'deviant', 'leather', 'ambient', 'biblical', 'general', 'crescent', 'new', 'low', 'new', 'blue', 'thin', 'warm', 'high', 'late', 'rich', 'ripe', 'sharp', 'tight', 'focal', 'scant', 'silly', 'vetted', 'rotten', 'shiny', 'dull', 'lucky', 'solid', 'fine', 'cold', 'hot', 'dizzy', 'dark', 'sick', 'nice', 'great', 'good', 'bad', 'ugly', 'rough', 'hilarious', 'sarcastic', 'recent', 'equal', 'logical', 'warm', 'early', 'static', 'dynamic', 'conclusive', 'fragile', 'ripped', 'yummy', 'milky', 'strange', 'current', 'definite', 'expert', 'simple', 'convenient']);
     EnglishGenerator.prototype.TRANSITIVE = EnglishGenerator.words(['fine', 'find', 'rule', 'reign', 'call', 'time', 'divide', 'list', 'join', 'replace', 'refine', 'drain', 'strain', 'show', 'display', 'hide', 'make', 'serve', 'pit', 'spin', 'slip', 'worry', 'work', 'label', 'expect', 'teach', 'confirm', 'call', 'live', 'kill', 'find', 'wrap', 'mash', 'shade', 'turn', 'time', 'love', 'hike', 'sign', 'dip', 'cross', 'design', 'craft', 'round', 'cater', 'fight', 'fold', 'pinch', 'execute', 'sense', 'trade', 'ruin', 'shake', 'advise', 'loathe', 'press', 'lift', 'conduct', 'recreate', 'conquer', 'command', 'break', 'help']);
+    EnglishGenerator.prototype.VERBING = function() {
+      return ingize(this.TRANSITIVE());
+    };
     EnglishGenerator.prototype.VERBAS = EnglishGenerator.words(['refers to', 'defines', 'considers', 'refines', 'recalls', 'remembers', 'understands', 'knows', 'mixes', 'tips', 'cares', 'gives', 'attaches', 'accounts', 'pulls', 'deepens']);
     EnglishGenerator.prototype.VERBPAST = EnglishGenerator.words(['created', 'defined', 'eleviated', 'refined', 'abstracted', 'moded', 'preferred', 'created', 'applied', 'used', 'said', 'made', 'hoped', 'saved', 'ruled', 'fined', 'fixed', 'loved', 'bound', 'copied', 'forged', 'folded', 'dubbed', 'pointed', 'cleaned', 'shifted', 'gobbled', 'decided', 'analyzed', 'abstracted', 'snipped', 'nicked', 'stole']);
     EnglishGenerator.prototype.NOUNPLURAL = EnglishGenerator.words(['news', 'sins', 'pins', 'tins', 'ices', 'views', 'shots', 'lists', 'muses', 'colors', 'values', 'stains', 'glasses', 'courses', 'stones', 'stills', 'oxides', 'minds', 'bodies', 'cheeses', 'flavors', 'orders', 'solutions', 'mothers', 'fathers', 'spies', 'circles', 'laws', 'wars', 'homes', 'houses', 'snickers', 'shoes', 'rings', 'plastics', 'belts', 'wires', 'holes', 'parents', 'seats', 'crackers', 'ships', 'trees', 'monkeys', 'vegetables']);
@@ -458,12 +481,44 @@
     });
     return ChorvaGenerator;
   })();
+  LolGenerator = (function() {
+    __extends(LolGenerator, EnglishGenerator);
+    function LolGenerator() {
+      LolGenerator.__super__.constructor.apply(this, arguments);
+    }
+    LolGenerator.prototype.SENTENCE = LolGenerator.randomize(function() {
+      return [[5, "QUESTION"], [5, "SENTENCE1"], [5, "SENTENCE2"], [5, "SENTENCE3"], [5, "SENTENCE4"], [5, "SENTENCE_COMMAND"], [7, "SENTENCE_EXCLAMATION"], [10, "SENTENCE_IN_YOUR"], [7, "SENTENCE_APPEARS"]];
+    });
+    LolGenerator.prototype.SENTENCE_IN_YOUR = LolGenerator.phrase(function() {
+      return ["I'm in your", "PLACE", ",", "VERBING", "your", "NOUNPLURAL"];
+    });
+    LolGenerator.prototype.SENTENCE_APPEARS = LolGenerator.phrase(function() {
+      return ["Suddenly, a wild", "NP", "appears!"];
+    });
+    LolGenerator.prototype.NOUN = LolGenerator.words(['lolcat', 'nyancat', 'Stephen Fry', 'Zoidberg', 'inception', 'Keanu Reeves', 'Charlie Sheen', 'socially-awkward penguin', 'unicorn', 'challenger', 'Leeroy Jenkins', 'baseball bat', 'peanut butter', 'troll', 'trollface', 'jailbait']);
+    LolGenerator.prototype.PLACE = LolGenerator.words(['interwebs', 'Reddit', '4chan', 'Twitter', 'Facebook', 'your base']);
+    LolGenerator.prototype.NOUNPLURAL = function() {
+      return pluralize(this.NOUN());
+    };
+    LolGenerator.prototype.VERBPAST = function() {
+      return pastize(this.TRANSITIVE());
+    };
+    LolGenerator.prototype.THE = LolGenerator.words(['the', 'our', "teh", 'his', 'her', 'their', 'my']);
+    LolGenerator.prototype.EXCLAMATION_WORDS = LolGenerator.words(["Why not Zoidberg?", "Bricks were shat", "The cake is a lie", "Arrrr", "All your base are belong to us", "But will it blend?", "O RLY?", "Peanut butter jelly time", 'U mad?']);
+    LolGenerator.prototype.EXCLAMATION = LolGenerator.randomize(function() {
+      return [[3, "EXCLAMATION_WORDS"], [1, "Y U NO", "SENTENCE_COMMAND"]];
+    });
+    LolGenerator.prototype.ADJECTIVE = LolGenerator.words(['hipster', 'conventional', 'sequential', 'not quite', 'chocolate', 'hazardous', 'deviant', 'leather', 'ambient', 'biblical', 'general', 'crescent', 'new', 'low', 'new', 'blue', 'thin', 'warm', 'high', 'late', 'rich', 'ripe', 'sharp', 'tight', 'focal', 'scant', 'silly', 'vetted', 'rotten', 'shiny', 'dull', 'lucky', 'solid', 'fine', 'cold', 'hot', 'dizzy', 'dark', 'sick', 'nice', 'great', 'good', 'bad', 'ugly', 'rough', 'hilarious', 'sarcastic', 'recent', 'equal', 'logical', 'warm', 'early', 'static', 'dynamic', 'conclusive', 'fragile', 'ripped', 'yummy', 'milky', 'strange', 'current', 'definite', 'expert', 'simple', 'convenient']);
+    LolGenerator.prototype.PRESET_PREPOS_PHRASE = LolGenerator.words(['hahaha', 'at the moment', 'surprisingly', 'but then again', 'after that', 'indeed', 'but before that', 'in conclusion', 'alternatively', 'in the future', 'once more', 'again', 'but then', 'though', 'right now', 'once', 'since then']);
+    return LolGenerator;
+  })();
   Generators = {
     english: EnglishGenerator,
     latin: LatinGenerator,
     jabberwock: JabberwockGenerator,
     tagalog: TagalogGenerator,
-    chorva: ChorvaGenerator
+    chorva: ChorvaGenerator,
+    lol: LolGenerator
   };
   if (typeof module !== "undefined" && module !== null) {
     module.exports = Generators;

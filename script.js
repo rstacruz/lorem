@@ -7,13 +7,18 @@ function btnGenerate_onClick()
 {
   var f, gen;
   gen = $('optGen').value;
+  switchTo(gen);
 
   // Change the permalink
   if (gen == 'latin')
-    { window.location.hash = null; }
+    { delete window.location.hash; }
   else
     { window.location.hash = '#' + gen; }
 
+}
+
+function switchTo(gen)
+{
   document.body.className = gen;
 
   f = Generators[gen].paragraphs(
@@ -31,18 +36,13 @@ window.onload = function()
   $('optGen')        .onchange   = btnGenerate_onClick;
   
   $('optSelect').onclick = function()
-    {
+  {
     $('textOut').select();
     $('textOut').focus();
   }
-  
-  if (window.location.hash) {
-    $('optGen').value = window.location.hash.substr(1);
-    btnGenerate_onClick();
-  }
 
   $('optShowtags').onclick = function()
-    {
+  {
     // If it's already got <p> then forget it
     if ($('textOut').value.indexOf('<p>') != -1)
     {
@@ -59,5 +59,11 @@ window.onload = function()
     }
   }
   
-  btnGenerate_onClick();
+  if (window.location.hash) {
+    var val = window.location.hash.substr(1);
+    $('optGen').value = val;
+    switchTo(val);
+  } else {
+    switchTo('latin');
+  }
 }
