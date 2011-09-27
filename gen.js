@@ -1,5 +1,5 @@
 (function() {
-  var ChorvaGenerator, EnglishGenerator, Generator, Generators, JabberwockGenerator, LatinGenerator, LolGenerator, Sham, TagalogGenerator, c, cache, capitalize, ingize, join, methods, pastize, periodize, pick, pluralize, punctuation, r, rand, sentencize, _;
+  var ChorvaGenerator, EnglishGenerator, Generator, Generators, JabberwockGenerator, LatinGenerator, LolGenerator, Sham, TagalogGenerator, c, cache, capitalize, ingize, join, methods, pastize, periodize, pick, pluralize, punctuation, r, rand, sentencize, uncapitalize, _;
   var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; }, __slice = Array.prototype.slice, __hasProp = Object.prototype.hasOwnProperty, __extends = function(child, parent) {
     for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; }
     function ctor() { this.constructor = child; }
@@ -69,11 +69,16 @@
     }
   };
   capitalize = function(str) {
-    if (str.length > 0) {
-      return str[0].toUpperCase() + str.substr(1);
-    } else {
-      return str;
+    if (!str.length) {
+      return "";
     }
+    return str[0].toUpperCase() + str.substr(1);
+  };
+  uncapitalize = function(str) {
+    if (!str.length) {
+      return "";
+    }
+    return str[0].toLowerCase() + str.substr(1);
   };
   pluralize = function(str) {
     if (str.length === 0) {
@@ -398,7 +403,7 @@
       }
       paras = LatinGenerator.__super__.paragraphs.call(this, count, length);
       if (paras.length) {
-        paras[0] = "Lorem ipsum dolor sit amet, " + (paras[0].toLowerCase());
+        paras[0] = "Lorem ipsum dolor sit amet, " + (uncapitalize(paras[0]));
       }
       return paras;
     };

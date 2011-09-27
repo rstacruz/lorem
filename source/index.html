@@ -135,10 +135,12 @@ periodize "Bye"
 <pre><code>capitalize "i'm here on IRC"
 #=&gt; "I'm here on IRC"
 </code></pre>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">capitalize</span> <span class="o">=</span> <span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="k">if</span> <span class="nx">str</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span>
-    <span class="nx">str</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">toUpperCase</span><span class="p">()</span> <span class="o">+</span> <span class="nx">str</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-  <span class="k">else</span>
-    <span class="nx">str</span></pre></div>             </td>           </tr>                               <tr id="section-19">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-19">&#182;</a>               </div>               <h3>pluralize(str)</h3>
+  <span class="k">return</span> <span class="s2">&quot;&quot;</span>  <span class="nx">unless</span> <span class="nx">str</span><span class="p">.</span><span class="nx">length</span>
+  <span class="nx">str</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">toUpperCase</span><span class="p">()</span> <span class="o">+</span> <span class="nx">str</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nx">uncapitalize</span> <span class="o">=</span> <span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="k">return</span> <span class="s2">&quot;&quot;</span>  <span class="nx">unless</span> <span class="nx">str</span><span class="p">.</span><span class="nx">length</span>
+  <span class="nx">str</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">toLowerCase</span><span class="p">()</span> <span class="o">+</span> <span class="nx">str</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></pre></div>             </td>           </tr>                               <tr id="section-19">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-19">&#182;</a>               </div>               <h3>pluralize(str)</h3>
 
 <pre><code>pluralize "worry"
 pluralize "teach"
@@ -581,7 +583,7 @@ is not a comma.</p>             </td>             <td class="code">             
 <p>Override <code>paragraphs</code> to ensure that the first paragraph
 begins with lorem ipsum.</p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="nv">paragraphs: </span><span class="p">(</span><span class="nx">count</span><span class="p">,</span> <span class="nx">length</span><span class="o">=</span><span class="kc">null</span><span class="p">)</span> <span class="o">-&gt;</span>
     <span class="nx">paras</span> <span class="o">=</span> <span class="k">super</span> <span class="nx">count</span><span class="p">,</span> <span class="nx">length</span>
-    <span class="nx">paras</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Lorem ipsum dolor sit amet, #{paras[0].toLowerCase()}&quot;</span>  <span class="k">if</span> <span class="nx">paras</span><span class="p">.</span><span class="nx">length</span>
+    <span class="nx">paras</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Lorem ipsum dolor sit amet, #{uncapitalize paras[0]}&quot;</span>  <span class="k">if</span> <span class="nx">paras</span><span class="p">.</span><span class="nx">length</span>
     <span class="nx">paras</span></pre></div>             </td>           </tr>                               <tr id="section-52">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-52">&#182;</a>               </div>               <h3>Words</h3>
 
 <p>Separate the long from the short words.</p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="nv">WORD: </span><span class="err">@</span><span class="nx">randomize</span> <span class="o">-&gt;</span> <span class="p">[</span>
