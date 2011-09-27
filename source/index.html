@@ -125,6 +125,9 @@ pluralize "teach"
   <span class="k">if</span> <span class="nx">str</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">length</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;y&#39;</span>
     <span class="s2">&quot;#{str.substr(0, str.length-1)}ies&quot;</span> <span class="c1"># worry =&gt; worries</span>
 
+  <span class="k">else</span> <span class="k">if</span> <span class="nx">str</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">length</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;s&#39;</span>
+    <span class="s2">&quot;#{str}es&quot;</span> <span class="c1"># class =&gt; classes</span>
+
   <span class="k">else</span> <span class="k">if</span> <span class="p">[</span><span class="s1">&#39;sh&#39;</span><span class="p">,</span> <span class="s1">&#39;ch&#39;</span><span class="p">,</span> <span class="s1">&#39;th&#39;</span><span class="p">].</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">length</span><span class="o">-</span><span class="mi">2</span><span class="p">))</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span>
     <span class="s2">&quot;#{str.substr(0, str.length-2)}es&quot;</span> <span class="c1"># teach =&gt; teaches</span>
 

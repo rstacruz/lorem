@@ -88,6 +88,8 @@
     }
     if (str.substr(str.length - 1) === 'y') {
       return "" + (str.substr(0, str.length - 1)) + "ies";
+    } else if (str.substr(str.length - 1) === 's') {
+      return "" + str + "es";
     } else if (['sh', 'ch', 'th'].indexOf(str.substr(str.length - 2)) > -1) {
       return "" + (str.substr(0, str.length - 2)) + "es";
     } else {
