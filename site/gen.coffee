@@ -4,7 +4,8 @@
 _ = @_ or require 'underscore'
 
 # ----------------------------------------------------------------------------
-# ## Sham [class]
+
+# ## Sham
 # A little shim to ensure that random picks are not repeated. This is used for
 # the `r()` helper.
 #
@@ -32,6 +33,7 @@ class Sham
     str
 
 # ----------------------------------------------------------------------------
+
 # ## Helpers
 # These are the little private functions that are used all around.
 
@@ -42,7 +44,7 @@ class Sham
 #     #=> can be 1, 2, 3, or 4
 #
 rand = (min, max) ->
-	Math.round(Math.random() * (max-min)) + min
+  Math.round(Math.random() * (max-min)) + min
 
 # ### pick()
 # Returns a random element from the given array.
@@ -82,18 +84,18 @@ join = (array) ->
     else
       "#{str} #{word}"
 
-# ### punctiation
+# ### punctuation
 # Regex to match for punctuations.
 punctuation = /^[,\?!\."]+$/
 
-# ### sentenceCase(array)
+# ### sentencize(array)
 # Joins a list of words into a sentence, taking case and punctuation into account.
 #
 #     s = sentence ['hello', 'Jacob']
 #     s()
 #     #=> 'Hello Jacob.'
 #
-sentenceCase = (array) ->
+sentencize = (array) ->
   array = [array]  unless array.constructor == Array
 
   str = periodize capitalize join array
@@ -103,18 +105,40 @@ sentenceCase = (array) ->
 
   str
 
+# ### periodize(str)
+# Adds a period to the end of a string. Doesn't affect strings that are already
+# punctuated.
+#
+#     periodize "Hello!"
+#     periodize "Bye"
+#
+#     #=> "Hello!", "Bye."
+#
 periodize = (str) ->
   if str.length > 0 and not str[str.length-1].match punctuation
     str + "."
   else
     str
 
+# ### capitalize(str)
+# 
+#     capitalize "i'm here on IRC"
+#     #=> "I'm here on IRC"
+#
 capitalize = (str) ->
   if str.length > 0
     str[0].toUpperCase() + str.substr(1)
   else
     str
 
+# ### pluralize(str)
+#
+#     pluralize "worry"
+#     pluralize "teach"
+#
+#     #=> "worries"
+#     #=> "teaches"
+#
 pluralize = (str) ->
   return str  if str.length == 0
 
@@ -128,7 +152,8 @@ pluralize = (str) ->
     "#{str}s" # Ends in vowel or consonant
 
 # ----------------------------------------------------------------------------
-# ## Generator [class]
+
+# ## Generator
 # The parent class of all generators.
 #
 # Each generator is made up of elements.  An element is any method that returns
@@ -142,14 +167,14 @@ pluralize = (str) ->
 # on.
 #
 class Generator
-  # ### SENTENCE() [element]
+  # ### SENTENCE()
   # Grammar for a sentence. This is the main element.
   SENTENCE: -> ''
 
   # ### sentence()
   # Generates a sentence.
   sentence: ->
-    sentenceCase @SENTENCE()
+    sentencize @SENTENCE()
 
   # ### paragraph(length)
   # Generates a paragraph with the given minimum character `length`.
@@ -171,10 +196,11 @@ class Generator
 
     output
 
-  # ### use(what) [method]
+  # ### use(what)
   # Uses `what`.
   #
   # When `what` is a:
+  #
   #  * Function: runs it and uses it again.
   #  * String, element name: uses that element.
   #  * Else: as is.
@@ -187,6 +213,8 @@ class Generator
     else
       what
 
+# ----------------------------------------------------------------------------
+
 # ## Builders
 # These are function generators that are class methods of the class
 # `Generator`. These are often used to build elements.
@@ -197,9 +225,9 @@ class Generator
 #       FOO: @phrase ...
 #
 # In this case, the `@` (this) refers to `MyGenerator` (notice it's not
-# inside a method function definitian).
+# inside a method function definition).
 
-# ### phrase(grammar) [class method]
+# ### phrase(grammar)
 # Returns a function that builds a phrase from a given `grammar`.  The
 # `grammar` is a list of either words, or elements, or functions.
 #
@@ -212,7 +240,7 @@ Generator.phrase = (args) ->
   list = _.flatten list
   -> _.compact _.flatten _.map list, (element) => @use(element)
 
-# ### words(array) [class method]
+# ### words(array)
 # Returns a function that picks a random word from the given `array`.
 #
 #     w = Generator.words ['Jenna', 'Jason', 'Jacob']
@@ -266,22 +294,23 @@ _.each methods, (meth) ->
     generator[meth].apply generator, args
 
 # ----------------------------------------------------------------------------
+
 # ## EnglishGenerator
 # This is the sillyness generator!
 #
 class EnglishGenerator extends Generator
 
-  # ### SENTENCE [element]
+  # ### SENTENCE
   # Redefine the main sentence element.
   SENTENCE: @randomize -> [
     [1, "QUESTION"]
     [1, "SENTENCE1"]
     [1, "SENTENCE2"]
     [1, "SENTENCE3"]
-    [3, "SENTENCE4"]
+    [1, "SENTENCE4"]
   ]
 
-  # ### SENTENCE1 [element]
+  # ### SENTENCE1
   # A sentence with a transitive verb.
   #
   #     A crown shades his touch.
@@ -294,11 +323,14 @@ class EnglishGenerator extends Generator
     if c(50) then ['THE', 'NOUN'] else ['NOUN', 'PREPOS', 'NOUN']
   ]
 
-  # ### SENTENCE2 [element]
+  # ### SENTENCE2
   # A sentence.
   # 
-  #     Surprisingly, a flake refines her forest of milky stills toward pins with wars.
-  #     Once, a bean mixes our postcards of dark parents until cheeses at fathers.
+  #     Surprisingly, a flake refines her forest of milky stills
+  #     toward pins with wars.
+  #
+  #     Once, a bean mixes our postcards of dark parents until
+  #     cheeses at fathers.
   #
   SENTENCE2: @phrase -> [
     'PREPOSPHRASEPRE', 'AN_ADJNOUN', 'VERBAS', 'THE', 'ADJNOUN',
@@ -307,16 +339,21 @@ class EnglishGenerator extends Generator
     ['PREPOS', 'THE', 'PLACE'] if c(50)
   ]
 
-  # ### SENTENCE3 [element]
+  # ### SENTENCE3
   # A sentence.
   #
-  #     "One's bill snipped our period's rain, really bad."
+  #     One's bill snipped our period's rain, really bad.
   #
   SENTENCE3: @phrase -> [
     'ARTICLE', 'NOUN', 'VERBPAST', 'ARTICLE',
     'ADJECTIVE' if c(50), 'NOUN', 'ADVERB' if c(25), 'POST'
   ]
 
+  # ### SENTENCE4
+  # A quote.
+  #
+  #     "Drag his sister's strobe!" she exclaimed behind our school.
+  #
   SENTENCE4: @phrase -> [
     'QUOTE', "ENTITY", "ADVERB" if c(20), "VERBPAST",
     ['PREPOS', 'THE', 'PLACE'] if c(10)
@@ -330,7 +367,7 @@ class EnglishGenerator extends Generator
     [1, @phrase -> ["TRANSITIVE", "ARTICLE", "NP"]]
   ]
 
-  # ### QUESTION [element]
+  # ### QUESTION
   # A question.
   #
   #     "Then again, why?"
@@ -341,7 +378,7 @@ class EnglishGenerator extends Generator
     [2, @phrase -> ["but" if c(50), "WHOWHAT", "VERBPAST", ["ARTICLE", "NP"] if c(60), "?"]]
   ]
 
-  # ### NP [element]
+  # ### NP
   # Noun phrase.
   #
   #     dull pail of kittens
@@ -352,23 +389,23 @@ class EnglishGenerator extends Generator
     [1, @phrase -> ['ADJECTIVE' if c(25), 'NOUN']]
   ]
 
-  # ### ENTITY [element]
+  # ### ENTITY
   # Nouns that can say things.
   ENTITY: @randomize -> [
     [1, "PRONOUN"]
     [1, @phrase -> ['ARTICLE', 'POSESSIVE' if c(25), 'ADJECTIVE' if c(25), 'NOUN']]
   ]
 
-  # ### PREPOSPHRASEPRE [element]
+  # ### PREPOSPHRASEPRE
   # What gets prepended to a sentence.
   PREPOSPHRASEPRE: @randomize -> [
     [3, '']
-    [1, @phrase -> ["PRESETPREPOSPHRASE", ","]]
+    [1, @phrase -> ["PRESET_PREPOS_PHRASE", ","]]
     [2, @phrase -> ["ADVERB", ","]]
     [1, @phrase -> ["ADVERB", "VERBPAST", ","]]
   ]
 
-  # ### POST [element]
+  # ### POST
   # What gets appended to a sentence at random.
   POST: @randomize -> [
     [3, '']
@@ -450,7 +487,7 @@ class EnglishGenerator extends Generator
     'recreate', 'conquer'
   ]
 
-  # ### VERBAS [element]
+  # ### VERBAS
   # Verb that goes in `____ (noun) as (noun)`.  Often preceded by a noun
   # that's singular.
   VERBAS: @words [
@@ -489,7 +526,7 @@ class EnglishGenerator extends Generator
   ]
 
   PRONOUNPLURAL: @words [
-	  'I', 'we', 'they'
+    'I', 'we', 'they'
   ]
 
   ENTITYPLURAL: @words [
@@ -501,7 +538,7 @@ class EnglishGenerator extends Generator
     'the', 'our', "one's", 'his', 'her', 'their', 'my'
   ]
 
-  PRESETPREPOSPHRASE: @words [
+  PRESET_PREPOS_PHRASE: @words [
     'at the moment', 'surprisingly', 'but then again', 'after that', 'indeed',
     'but before that', 'in conclusion', 'alternatively', 'in the future',
     'once more', 'again', 'but then', 'though', 'right now', 'once', 'since then'
@@ -533,11 +570,12 @@ class EnglishGenerator extends Generator
   ]
 
 # ----------------------------------------------------------------------------
+
 # ## LatinGenerator
 # Makes faux lorem ipsum.
 #
 class LatinGenerator extends Generator
-  # ### SENTENCE [element]
+  # ### SENTENCE
   # No grammar rules here, just pick out random words and intersperse between
   # long and short ones.
   #
@@ -563,6 +601,13 @@ class LatinGenerator extends Generator
     paras[0] = "Lorem ipsum dolor sit amet, #{paras[0].toLowerCase()}"  if paras.length
     paras
 
+  # ### Words
+  # Separate the long from the short words.
+  WORD: @randomize -> [
+    [1, 'SMALL_WORD']
+    [2, 'LONG_WORD']
+  ]
+
   LONG_WORD: @words [
     'accumsan', 'adipiscing', 'aliquam', 'aliquip', 'amet', 'anteposuerit',
     'assum', 'augue', 'autem', 'blandit', 'claram', 'clari', 'claritas',
@@ -579,7 +624,7 @@ class LatinGenerator extends Generator
     'nihil', 'nisl', 'nobis', 'nostrud', 'notare', 'nulla', 'nunc', 'odio',
     'parum', 'per', 'placerat', 'possim', 'praesent', 'processus', 'quam',
     'quarta', 'qui', 'quinta', 'quis', 'quod', 'saepius', 'seacula', 'sed',
-    'sequitur', 'sit', 'sollemnes', 'soluta', 'suscipit',	'tempor',
+    'sequitur', 'sit', 'sollemnes', 'soluta', 'suscipit',  'tempor',
     'tincidunt', 'typi', 'ullamcorper', 'usus', 'vel', 'velit', 'veniam',
     'vero', 'videntur', 'volutpat', 'vulputate', 'wisi'
   ]
@@ -589,21 +634,11 @@ class LatinGenerator extends Generator
     'ii', 'in', 'ex'
   ]
 
-  WORD: @randomize -> [
-    [1, 'SMALL_WORD']
-    [2, 'LONG_WORD']
-  ]
-
-  WORD_OR_PUNCTUATION: @randomize -> [
-    [1, ',']
-    [6, 'WORD']
-  ]
-
-
 # ----------------------------------------------------------------------------
+
 # ## JabberwockGenerator
 # Makes random text based on Jabberwockian non-sense. It reuses the English
-# grammar rules.
+# grammar rules and just redefines the word list.
 #
 class JabberwockGenerator extends EnglishGenerator
   NOUN: @words [
@@ -655,6 +690,136 @@ class JabberwockGenerator extends EnglishGenerator
   ]
 
 # ----------------------------------------------------------------------------
+
+# ## TagalogGenerator
+# Generates garbage in Tagalog/Filipino.
+class TagalogGenerator extends Generator
+  SENTENCE: ->
+    @SENTENCE1()
+
+  SENTENCE1: @phrase -> [
+    "PREPOS_PHRASE_PRE", "ang",
+    "POSSESSIVE" if c(50),
+    ["ADJECTIVE_PHRASE", "NA"] if c(50),
+    "NP"
+    "ay"
+    "VERBPAST"
+    "ng"
+    "POSSESSIVE" if c(60)
+    "NP"
+  ]
+
+  NP: @phrase -> [
+    "mga" if c(30),
+    "NOUN",
+    ["ng", "NOUN"] if c(20)
+  ]
+
+  ADJNOUN: -> ''
+
+  PREPOS_PHRASE_PRE: @phrase -> [
+    [ 'PRESET_PREPOS_PHRASE', ',' ] if c(50)
+  ]
+
+  ADJECTIVE_PHRASE: ->
+    if c(40)
+      @ADJECTIVE_PREFIX() + @ADJECTIVE()
+    else
+      @ADJECTIVE()
+
+  # ### Basic words
+  NOUN: @words [
+    'pangalan', 'kaibigan', 'liwanag',  'dilim', 'habagat', 'tinik'
+    'ibon', 'matanda', 'reyna', 'kasama', 'kapatid', 'tauhan', 'bunso',
+    'lola mo', 'lupa', 'hangin', 'pamahalaan', 'pangamba', 'himala'
+  ]
+
+  ADJECTIVE_PREFIX: @words [
+    "pinaka-", "napaka-", "mas-"
+  ]
+
+  VERBPAST: @words [
+    'pinili', 'ginawa', 'binago', 'dinamdam', 'itinaksil', 'binawi', 'hinatol',
+    'nilunod', 'tinangkilik', 'sinama', 'isinulat', 'itinakda', 'sinakay',
+    'ipinaalam', 'pinanaw', 'ipinalabas',
+  ]
+
+  ADJECTIVE: @words [
+    'masakim', 'malumbay', 'malas', 'busilak', 'maliwanag',
+    'maganda', 'matipuno', 'malakas'
+  ]
+
+  PRESET_PREPOS_PHRASE: @words [
+    'ngunit', 'subalit', 'datapwat', 'sabagay', 'kung ganon',
+    'ngayon pa man', 'ganoon pa man', 'para saatin', "para sa'yo", 'at'
+  ]
+
+  POSSESSIVE: @words [
+    'aking', 'iyong', 'ating', 'kanyang'
+  ]
+
+  NA: @words [
+    'na', 'mong', 'nyang'
+  ]
+
+# ----------------------------------------------------------------------------
+
+# ## ChorvaGenerator
+# A sociolect of Tagalog implemented for the lulz.
+#
+# Just like the `JabberwockGenerator`, this works by extending a generator
+# with grammar rules (Tagalog in this case) and merely replacing words.
+#
+class ChorvaGenerator extends TagalogGenerator
+  NOUN: @words [
+    'pangalan', 'kaibigan', 'dilim', 'tinik', 'chuvaness', 'eklat', 'eklavoo',
+    'chuchu', 'chuchubels', 'bubukesh', 'chenelyn', 'beki', 'mitchels', 'fez',
+    'itech', 'anik', 'anik-anik', 'vaklush', 'reynabels', 'mother', 'kapatid',
+    'kuya', 'bunso', 'Shamcey Supsup', 'jowa', 'kyota', 'keri', 'mudra',
+    'lulubelles', 'lokarets', 'tralala', 'hitad', 'bato', 'lupa', 'hangin',
+    'pamahalaan', 'pangamba', 'himala', 'tagumpay'
+  ]
+    
+  # ### VERBPAST
+  # Not necessarily past tense, but past tense verbs work best.
+  VERBPAST: @words [
+    'pinili', 'ginawa', 'binago', 'dinamdam', 'itinaksil', 'binawi',
+    'hinatol', 'nilunod', 'tinangkilik', 'sinama', 'isinulat',
+    'itinakda', 'sinakay', 'ipinaalam', 'pinanaw', 'ipinalabas',
+    'chinaka', 'na-Julie Yap Daza', 'chinuk-chak-cheness',
+    'nag-jembot-jembot', 'inokray', 'lumafang', 'umapear',
+    'nagpa-feel', 'nag-gorabels', 'pupuntahan', 'keri'
+  ]
+    
+  ADJECTIVE: @words [
+    'chaka', 'chipangga', 'thundercats', 'pagoda cold wave lotion',
+    'shubos', 'tarush', 'kyoho', 'chabaka', 'kabog', 'bongga',
+    'ganders', 'jutay', 'krung-krung', 'oblation', 'nakaka-lurkey',
+    'plastikada', 'shonga-shonga', 'Haggardo Versoza'
+  ]
+    
+  PRESET_PREPOS_PHRASE: @words [
+    'ayon', 'nako', 'hay nako', 'aba',
+    'in fairness', 'at in fairview', 'o ano', 'ditey sa balur',
+    'at nako, alam mo ba', 'at eto pa', 'kung ako sayo, mother'
+  ]
+    
+  EXCLAMATIONS: @words [
+    'Charing!', 'O anong sey mo?', 'Chaka!', 'Ano ba itetch?!', 'Chos!',
+    'Bonggang-bongga!', 'Awaaaard!', 'Win na win!'
+  ]
+
+  PUNCTUATION: @words [
+    '.', '!'
+  ]
+
+  SENTENCE: @randomize -> [
+    [1, 'EXCLAMATIONS']
+    [1, @phrase -> ['SENTENCE1', 'PUNCTUATION']]
+  ]
+
+# ----------------------------------------------------------------------------
+
 # ## Exports
 # Export the generators to NodeJS's `module` object, or the browser's
 # `window` object.
@@ -663,10 +828,12 @@ Generators =
   english:    EnglishGenerator
   latin:      LatinGenerator
   jabberwock: JabberwockGenerator
+  tagalog:    TagalogGenerator
+  chorva:     ChorvaGenerator
 
-if module
+if module?
   module.exports = Generators
 else
   @Generators = Generators
 
-console.log Generators.jabberwock.paragraphs(3).join("\n\n")
+console.log Generators.chorva.paragraphs(5).join("\n\n")

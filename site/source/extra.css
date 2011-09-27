@@ -1,5 +1,8 @@
 hr {
-  display: none; }
+  margin-right: -25px;
+  margin-left: -50px;
+  border: 0;
+  border-top: dotted 1px #bbb; }
 
 thead {
   display: none; }
@@ -19,10 +22,15 @@ h3 + p {
 body .err {
   border: 0; color: #b36; }
 
+/* tr:hover td.code { */
+/*   background: #f3f3fc; } */
+
+/* tr:hover td.docs { */
+/*   background: #fefefa; } */
+
 td.docs, td.code {
-  border-top: solid 1px #eee;
   padding-top: 20px;
-  padding-bottom: 40px; }
+  padding-bottom: 20px; }
 
 td.docs pre {
   color: #80909d;
