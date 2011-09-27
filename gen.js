@@ -91,7 +91,7 @@
     } else if (str.substr(str.length - 1) === 's') {
       return "" + str + "es";
     } else if (['sh', 'ch', 'th'].indexOf(str.substr(str.length - 2)) > -1) {
-      return "" + (str.substr(0, str.length - 2)) + "es";
+      return "" + str + "es";
     } else {
       return "" + str + "s";
     }
@@ -195,7 +195,7 @@
       EnglishGenerator.__super__.constructor.apply(this, arguments);
     }
     EnglishGenerator.prototype.SENTENCE = EnglishGenerator.randomize(function() {
-      return [[1, "QUESTION"], [1, "SENTENCE1"], [1, "SENTENCE2"], [1, "SENTENCE3"], [1, "SENTENCE4"]];
+      return [[5, "QUESTION"], [5, "SENTENCE1"], [5, "SENTENCE2"], [5, "SENTENCE3"], [5, "SENTENCE4"], [5, "SENTENCE_COMMAND"], [4, "SENTENCE_EXCLAMATION"]];
     });
     EnglishGenerator.prototype.SENTENCE1 = EnglishGenerator.phrase(function() {
       return ['PREPOSPHRASEPRE', 'NP', c(50) ? ['of', c(30) ? 'ARTICLE' : void 0, 'NOUN'] : void 0, 'TRANSITIVE_S', c(50) ? ['THE', 'NOUN'] : ['NOUN', 'PREPOS', 'NOUN']];
@@ -212,9 +212,9 @@
     EnglishGenerator.prototype.QUOTE = function() {
       var punc;
       punc = r(['!', ',', ',']);
-      return "\"" + (capitalize(join(this.SAYING()))) + punc + "\"";
+      return "\"" + (capitalize(join(this.SENTENCE_COMMAND()))) + punc + "\"";
     };
-    EnglishGenerator.prototype.SAYING = EnglishGenerator.randomize(function() {
+    EnglishGenerator.prototype.SENTENCE_COMMAND = EnglishGenerator.randomize(function() {
       return [
         [
           1, this.phrase(function() {
@@ -223,6 +223,10 @@
         ]
       ];
     });
+    EnglishGenerator.prototype.SENTENCE_EXCLAMATION = EnglishGenerator.phrase(function() {
+      return ['EXCLAMATION', c(30) ? [',', 'my', c(50) ? [c(50) ? ['ADJECTIVE', ','] : void 0, 'ADJECTIVE'] : void 0, 'NP'] : void 0, '!'];
+    });
+    EnglishGenerator.prototype.EXCLAMATION = EnglishGenerator.words(["egads", "alas", "oh no", "yes", "indeed"]);
     EnglishGenerator.prototype.QUESTION = EnglishGenerator.randomize(function() {
       return [
         [
@@ -474,6 +478,7 @@
   };
   if (typeof module !== "undefined" && module !== null) {
     module.exports = Generators;
+    console.log(Generators.english.paragraphs(5).join("\n\n"));
   } else {
     this.Generators = Generators;
   }

@@ -157,7 +157,7 @@ pluralize "teach"
     <span class="s2">&quot;#{str}es&quot;</span> <span class="c1"># class =&gt; classes</span>
 
   <span class="k">else</span> <span class="k">if</span> <span class="p">[</span><span class="s1">&#39;sh&#39;</span><span class="p">,</span> <span class="s1">&#39;ch&#39;</span><span class="p">,</span> <span class="s1">&#39;th&#39;</span><span class="p">].</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">length</span><span class="o">-</span><span class="mi">2</span><span class="p">))</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span>
-    <span class="s2">&quot;#{str.substr(0, str.length-2)}es&quot;</span> <span class="c1"># teach =&gt; teaches</span>
+    <span class="s2">&quot;#{str}es&quot;</span> <span class="c1"># teach =&gt; teaches</span>
 
   <span class="k">else</span>
     <span class="s2">&quot;#{str}s&quot;</span> <span class="c1"># Ends in vowel or consonant</span></pre></div>             </td>           </tr>                               <tr id="section-20">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-20">&#182;</a>               </div>               <hr />             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-21">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-21">&#182;</a>               </div>               <h2>Generator</h2>
@@ -283,11 +283,13 @@ EnglishGenerator()).paragraph()</code>.</p>             </td>             <td cl
 <p>This is the sillyness generator!</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">class</span> <span class="nx">EnglishGenerator</span> <span class="k">extends</span> <span class="nx">Generator</span></pre></div>             </td>           </tr>                               <tr id="section-35">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-35">&#182;</a>               </div>               <h3>SENTENCE</h3>
 
 <p>Redefine the main sentence element.</p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="nv">SENTENCE: </span><span class="err">@</span><span class="nx">randomize</span> <span class="o">-&gt;</span> <span class="p">[</span>
-    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;QUESTION&quot;</span><span class="p">]</span>
-    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;SENTENCE1&quot;</span><span class="p">]</span>
-    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;SENTENCE2&quot;</span><span class="p">]</span>
-    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;SENTENCE3&quot;</span><span class="p">]</span>
-    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;SENTENCE4&quot;</span><span class="p">]</span>
+    <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;QUESTION&quot;</span><span class="p">]</span>
+    <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;SENTENCE1&quot;</span><span class="p">]</span>
+    <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;SENTENCE2&quot;</span><span class="p">]</span>
+    <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;SENTENCE3&quot;</span><span class="p">]</span>
+    <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;SENTENCE4&quot;</span><span class="p">]</span>
+    <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;SENTENCE_COMMAND&quot;</span><span class="p">]</span>
+    <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;SENTENCE_EXCLAMATION&quot;</span><span class="p">]</span>
   <span class="p">]</span></pre></div>             </td>           </tr>                               <tr id="section-36">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-36">&#182;</a>               </div>               <h3>SENTENCE1</h3>
 
 <p>A sentence with a transitive verb.</p>
@@ -333,10 +335,20 @@ cheeses at fathers.
 
   <span class="nv">QUOTE: </span><span class="o">-&gt;</span>
     <span class="nx">punc</span> <span class="o">=</span> <span class="nx">r</span> <span class="p">[</span><span class="s1">&#39;!&#39;</span><span class="p">,</span> <span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;,&#39;</span><span class="p">]</span>
-    <span class="s2">&quot;\&quot;#{capitalize join @SAYING()}#{punc}\&quot;&quot;</span>
+    <span class="s2">&quot;\&quot;#{capitalize join @SENTENCE_COMMAND()}#{punc}\&quot;&quot;</span>
 
-  <span class="nv">SAYING: </span><span class="err">@</span><span class="nx">randomize</span> <span class="o">-&gt;</span> <span class="p">[</span>
+  <span class="nv">SENTENCE_COMMAND: </span><span class="err">@</span><span class="nx">randomize</span> <span class="o">-&gt;</span> <span class="p">[</span>
     <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="err">@</span><span class="nx">phrase</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="s2">&quot;TRANSITIVE&quot;</span><span class="p">,</span> <span class="s2">&quot;ARTICLE&quot;</span><span class="p">,</span> <span class="s2">&quot;NP&quot;</span><span class="p">]]</span>
+  <span class="p">]</span>
+
+  <span class="nv">SENTENCE_EXCLAMATION: </span><span class="err">@</span><span class="nx">phrase</span> <span class="o">-&gt;</span> <span class="p">[</span>
+    <span class="s1">&#39;EXCLAMATION&#39;</span><span class="p">,</span>
+    <span class="p">[</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;my&#39;</span><span class="p">,</span> <span class="p">[[</span><span class="s1">&#39;ADJECTIVE&#39;</span><span class="p">,</span> <span class="s1">&#39;,&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="nx">c</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span> <span class="s1">&#39;ADJECTIVE&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="nx">c</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span> <span class="s1">&#39;NP&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="nx">c</span><span class="p">(</span><span class="mi">30</span><span class="p">),</span>
+    <span class="s1">&#39;!&#39;</span>
+  <span class="p">]</span>
+
+  <span class="nv">EXCLAMATION: </span><span class="err">@</span><span class="nx">words</span> <span class="p">[</span>
+    <span class="s2">&quot;egads&quot;</span><span class="p">,</span> <span class="s2">&quot;alas&quot;</span><span class="p">,</span> <span class="s2">&quot;oh no&quot;</span><span class="p">,</span> <span class="s2">&quot;yes&quot;</span><span class="p">,</span> <span class="s2">&quot;indeed&quot;</span>
   <span class="p">]</span></pre></div>             </td>           </tr>                               <tr id="section-40">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-40">&#182;</a>               </div>               <h3>QUESTION</h3>
 
 <p>A question.</p>
@@ -759,6 +771,7 @@ to randomly make sentences end with exclamation points.</p>             </td>   
 
 <span class="k">if</span> <span class="nx">module</span><span class="o">?</span>
   <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">Generators</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">Generators</span><span class="p">.</span><span class="nx">english</span><span class="p">.</span><span class="nx">paragraphs</span><span class="p">(</span><span class="mi">5</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="s2">&quot;\n\n&quot;</span><span class="p">)</span>
 <span class="k">else</span>
   <span class="err">@</span><span class="nx">Generators</span> <span class="o">=</span> <span class="nx">Generators</span>
 
