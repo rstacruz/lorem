@@ -157,6 +157,9 @@ pluralize = (str) ->
   if str.substr(str.length-1) == 'y'
     "#{str.substr(0, str.length-1)}ies" # worry => worries
 
+  else if str.substr(str.length-1) == 's'
+    "#{str}es" # class => classes
+
   else if ['sh', 'ch', 'th'].indexOf(str.substr(str.length-2)) > -1
     "#{str.substr(0, str.length-2)}es" # teach => teaches
 

@@ -693,7 +693,8 @@ with grammar rules (Tagalog in this case) and merely replacing words.</p>       
     <span class="s1">&#39;chaka&#39;</span><span class="p">,</span> <span class="s1">&#39;chipangga&#39;</span><span class="p">,</span> <span class="s1">&#39;thundercats&#39;</span><span class="p">,</span> <span class="s1">&#39;pagoda cold wave lotion&#39;</span><span class="p">,</span>
     <span class="s1">&#39;shubos&#39;</span><span class="p">,</span> <span class="s1">&#39;tarush&#39;</span><span class="p">,</span> <span class="s1">&#39;kyoho&#39;</span><span class="p">,</span> <span class="s1">&#39;chabaka&#39;</span><span class="p">,</span> <span class="s1">&#39;kabog&#39;</span><span class="p">,</span> <span class="s1">&#39;bongga&#39;</span><span class="p">,</span>
     <span class="s1">&#39;ganders&#39;</span><span class="p">,</span> <span class="s1">&#39;jutay&#39;</span><span class="p">,</span> <span class="s1">&#39;krung-krung&#39;</span><span class="p">,</span> <span class="s1">&#39;oblation&#39;</span><span class="p">,</span> <span class="s1">&#39;nakaka-lurkey&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;plastikada&#39;</span><span class="p">,</span> <span class="s1">&#39;shonga-shonga&#39;</span><span class="p">,</span> <span class="s1">&#39;Haggardo Versoza&#39;</span>
+    <span class="s1">&#39;plastikada&#39;</span><span class="p">,</span> <span class="s1">&#39;shonga-shonga&#39;</span><span class="p">,</span> <span class="s1">&#39;Haggardo Versoza&#39;</span><span class="p">,</span> <span class="s1">&#39;Bitter Ocampo&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Stress Drilon&#39;</span>
   <span class="p">]</span>
     
   <span class="nv">PRESET_PREPOS_PHRASE: </span><span class="err">@</span><span class="nx">words</span> <span class="p">[</span>
@@ -713,8 +714,8 @@ with grammar rules (Tagalog in this case) and merely replacing words.</p>       
 
 <p>The <code>sentence</code> element has been redefined to add exclamations, and
 to randomly make sentences end with exclamation points.</p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="nv">SENTENCE: </span><span class="err">@</span><span class="nx">randomize</span> <span class="o">-&gt;</span> <span class="p">[</span>
-    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;EXCLAMATIONS&#39;</span><span class="p">]</span>
-    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="err">@</span><span class="nx">phrase</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="s1">&#39;SENTENCE1&#39;</span><span class="p">,</span> <span class="s1">&#39;PUNCTUATION&#39;</span><span class="p">]]</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;EXCLAMATIONS&#39;</span><span class="p">]</span>
+    <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="err">@</span><span class="nx">phrase</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="s1">&#39;SENTENCE1&#39;</span><span class="p">,</span> <span class="s1">&#39;PUNCTUATION&#39;</span><span class="p">]]</span>
   <span class="p">]</span></pre></div>             </td>           </tr>                               <tr id="section-59">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-59">&#182;</a>               </div>               <hr />             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-60">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-60">&#182;</a>               </div>               <h2>Exports</h2>
 
 <p>Export the generators to NodeJS's <code>module</code> object, or the browser's
