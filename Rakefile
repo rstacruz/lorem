@@ -1,5 +1,9 @@
+task :docco do
+  system "cd site; docco gen.coffee; mv docs/gen.html source/index.html; cat docs/docco.css source/extra.css > source/docco.css; rm -rf docs"
+end
+
 desc "Builds"
-task :build do
+task :build => :docco do
   system "proton build"
 end
 
