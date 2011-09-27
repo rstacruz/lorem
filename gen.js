@@ -456,7 +456,7 @@
     ChorvaGenerator.prototype.PUNCTUATION = ChorvaGenerator.words(['.', '!']);
     ChorvaGenerator.prototype.SENTENCE = ChorvaGenerator.randomize(function() {
       return [
-        [2, 'EXCLAMATIONS'], [
+        [3, 'EXCLAMATIONS'], [
           5, this.phrase(function() {
             return ['SENTENCE1', 'PUNCTUATION'];
           })
