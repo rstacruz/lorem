@@ -56,17 +56,10 @@
   };
   punctuation = /^[,\?!\."]+$/;
   sentencize = function(array) {
-    var str;
     if (array.constructor !== Array) {
       array = [array];
     }
-    str = periodize(capitalize(join(array)));
-    if (str.length > 0) {
-      if (!str[str.length - 1].match(punctuation)) {
-        str += ".";
-      }
-    }
-    return str;
+    return periodize(capitalize(join(array)));
   };
   periodize = function(str) {
     if (str.length > 0 && !str[str.length - 1].match(punctuation)) {
@@ -335,7 +328,7 @@
     EnglishGenerator.prototype.TRANSITIVE_S = function() {
       return pluralize(this.TRANSITIVE());
     };
-    EnglishGenerator.prototype.NOUN = EnglishGenerator.words(['depth', 'sense', 'touch', 'farce', 'sight', 'vision', 'height', 'balance', 'pitch', 'scion', 'might', 'store', 'funk', 'worm', 'coffee', 'bean', 'ice', 'salad', 'finger', 'chicken', 'dog', 'cat', 'mouse', 'trunk', 'pond', 'chain', 'liquid', 'shift', 'fiber', 'dilemma', 'clock', 'past', 'rain', 'cap', 'key', 'string', 'bill', 'rod', 'outline', 'hour', 'period', 'time', 'number', 'section', 'state', 'page', 'content', 'surface', 'work', 'comment', 'acuse', 'support', 'postcard', 'sheet', 'paper', 'phone', 'mail', 'gravy', 'sauce', 'gas', 'insect', 'claw', 'powder', 'plastic', 'seed', 'leaf', 'bridge', 'home', 'flake', 'art', 'pail', 'crown', 'elephant', 'sky', 'vodka', 'gin', 'tonic', 'grin', 'smile', 'valley', 'threat', 'boss', 'employee', 'heart', 'head', 'fingernail', 'aquarium', 'forest', 'science', 'accessory']);
+    EnglishGenerator.prototype.NOUN = EnglishGenerator.words(['depth', 'sense', 'touch', 'farce', 'sight', 'vision', 'height', 'balance', 'pitch', 'scion', 'might', 'store', 'funk', 'worm', 'coffee', 'bean', 'ice', 'salad', 'finger', 'chicken', 'dog', 'cat', 'mouse', 'trunk', 'pond', 'chain', 'liquid', 'shift', 'fiber', 'dilemma', 'clock', 'past', 'rain', 'cap', 'key', 'string', 'bill', 'rod', 'outline', 'hour', 'period', 'time', 'number', 'section', 'state', 'page', 'content', 'surface', 'work', 'comment', 'acuse', 'support', 'postcard', 'sheet', 'paper', 'phone', 'mail', 'gravy', 'sauce', 'gas', 'insect', 'claw', 'powder', 'plastic', 'seed', 'leaf', 'bridge', 'home', 'flake', 'art', 'pail', 'crown', 'elephant', 'sky', 'vodka', 'gin', 'tonic', 'grin', 'smile', 'valley', 'threat', 'boss', 'employee', 'heart', 'head', 'fingernail', 'aquarium', 'forest', 'science', 'accessory', 'spinach', 'tofu', 'hamburger', 'teddy bear', 'shotglass', 'cola', 'applesauce', 'cinnamon', 'lucky charm', 'towel']);
     EnglishGenerator.prototype.PLACE = EnglishGenerator.words(['kitchen', 'hall', 'school', 'zoo', 'local library', 'camp', 'stadium', 'workplace', 'countryside', 'courtyard', 'balcony', 'porch', 'backpack', 'bag', 'knapsack', 'gullet', 'stomach', 'river']);
     EnglishGenerator.prototype.ADJECTIVE = EnglishGenerator.words(['conventional', 'sequential', 'not quite', 'chocolate', 'hazardous', 'deviant', 'leather', 'ambient', 'biblical', 'general', 'crescent', 'new', 'low', 'new', 'blue', 'thin', 'warm', 'high', 'late', 'rich', 'ripe', 'sharp', 'tight', 'focal', 'scant', 'silly', 'vetted', 'rotten', 'shiny', 'dull', 'lucky', 'solid', 'fine', 'cold', 'hot', 'dizzy', 'dark', 'sick', 'nice', 'great', 'good', 'bad', 'ugly', 'rough', 'hilarious', 'sarcastic', 'recent', 'equal', 'logical', 'warm', 'early', 'static', 'dynamic', 'conclusive', 'fragile', 'ripped', 'yummy', 'milky', 'strange', 'current', 'definite', 'expert', 'simple', 'convenient']);
     EnglishGenerator.prototype.TRANSITIVE = EnglishGenerator.words(['fine', 'find', 'rule', 'reign', 'call', 'time', 'divide', 'list', 'join', 'replace', 'refine', 'drain', 'strain', 'show', 'display', 'hide', 'make', 'serve', 'pit', 'spin', 'slip', 'worry', 'work', 'label', 'expect', 'teach', 'confirm', 'call', 'live', 'kill', 'find', 'wrap', 'mash', 'shade', 'turn', 'time', 'love', 'hike', 'sign', 'dip', 'cross', 'design', 'craft', 'round', 'cater', 'fight', 'fold', 'pinch', 'execute', 'sense', 'trade', 'ruin', 'shake', 'advise', 'loathe', 'press', 'lift', 'conduct', 'recreate', 'conquer', 'command', 'break', 'help']);
@@ -474,8 +467,10 @@
   };
   if (typeof module !== "undefined" && module !== null) {
     module.exports = Generators;
-    console.log(Generators.english.paragraphs(5).join("\n\n"));
   } else {
     this.Generators = Generators;
+  }
+  if ((typeof module !== "undefined" && module !== null) && !(module.parent != null)) {
+    console.log(Generators.english.paragraphs(5).join("\n\n"));
   }
 }).call(this);

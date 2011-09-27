@@ -114,12 +114,7 @@ s()
 </code></pre>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">sentencize</span> <span class="o">=</span> <span class="p">(</span><span class="nx">array</span><span class="p">)</span> <span class="o">-&gt;</span>
   <span class="nx">array</span> <span class="o">=</span> <span class="p">[</span><span class="nx">array</span><span class="p">]</span>  <span class="nx">unless</span> <span class="nx">array</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">==</span> <span class="nb">Array</span>
 
-  <span class="nx">str</span> <span class="o">=</span> <span class="nx">periodize</span> <span class="nx">capitalize</span> <span class="nx">join</span> <span class="nx">array</span>
-
-  <span class="k">if</span> <span class="nx">str</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span>
-    <span class="nx">str</span> <span class="o">+=</span> <span class="s2">&quot;.&quot;</span>  <span class="nx">unless</span> <span class="nx">str</span><span class="p">[</span><span class="nx">str</span><span class="p">.</span><span class="nx">length</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="nx">match</span> <span class="nx">punctuation</span>
-
-  <span class="nx">str</span></pre></div>             </td>           </tr>                               <tr id="section-17">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-17">&#182;</a>               </div>               <h3>periodize(str)</h3>
+  <span class="nx">periodize</span> <span class="nx">capitalize</span> <span class="nx">join</span> <span class="nx">array</span></pre></div>             </td>           </tr>                               <tr id="section-17">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-17">&#182;</a>               </div>               <h3>periodize(str)</h3>
 
 <p>Adds a period to the end of a string. Doesn't affect strings that are already
 punctuated.</p>
@@ -428,7 +423,9 @@ static smile
     <span class="s1">&#39;seed&#39;</span><span class="p">,</span> <span class="s1">&#39;leaf&#39;</span><span class="p">,</span> <span class="s1">&#39;bridge&#39;</span><span class="p">,</span> <span class="s1">&#39;home&#39;</span><span class="p">,</span> <span class="s1">&#39;flake&#39;</span><span class="p">,</span> <span class="s1">&#39;art&#39;</span><span class="p">,</span> <span class="s1">&#39;pail&#39;</span><span class="p">,</span> <span class="s1">&#39;crown&#39;</span><span class="p">,</span>
     <span class="s1">&#39;elephant&#39;</span><span class="p">,</span> <span class="s1">&#39;sky&#39;</span><span class="p">,</span> <span class="s1">&#39;vodka&#39;</span><span class="p">,</span> <span class="s1">&#39;gin&#39;</span><span class="p">,</span> <span class="s1">&#39;tonic&#39;</span><span class="p">,</span> <span class="s1">&#39;grin&#39;</span><span class="p">,</span> <span class="s1">&#39;smile&#39;</span><span class="p">,</span> <span class="s1">&#39;valley&#39;</span><span class="p">,</span>
     <span class="s1">&#39;threat&#39;</span><span class="p">,</span> <span class="s1">&#39;boss&#39;</span><span class="p">,</span> <span class="s1">&#39;employee&#39;</span><span class="p">,</span> <span class="s1">&#39;heart&#39;</span><span class="p">,</span> <span class="s1">&#39;head&#39;</span><span class="p">,</span> <span class="s1">&#39;fingernail&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;aquarium&#39;</span><span class="p">,</span> <span class="s1">&#39;forest&#39;</span><span class="p">,</span> <span class="s1">&#39;science&#39;</span><span class="p">,</span> <span class="s1">&#39;accessory&#39;</span>
+    <span class="s1">&#39;aquarium&#39;</span><span class="p">,</span> <span class="s1">&#39;forest&#39;</span><span class="p">,</span> <span class="s1">&#39;science&#39;</span><span class="p">,</span> <span class="s1">&#39;accessory&#39;</span><span class="p">,</span> <span class="s1">&#39;spinach&#39;</span><span class="p">,</span> <span class="s1">&#39;tofu&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;hamburger&#39;</span><span class="p">,</span> <span class="s1">&#39;teddy bear&#39;</span><span class="p">,</span> <span class="s1">&#39;shotglass&#39;</span><span class="p">,</span> <span class="s1">&#39;cola&#39;</span><span class="p">,</span> <span class="s1">&#39;applesauce&#39;</span><span class="p">,</span> <span class="s1">&#39;cinnamon&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;lucky charm&#39;</span><span class="p">,</span> <span class="s1">&#39;towel&#39;</span>
   <span class="p">]</span>
 
   <span class="nv">PLACE: </span><span class="err">@</span><span class="nx">words</span> <span class="p">[</span>
@@ -773,8 +770,10 @@ to randomly make sentences end with exclamation points.</p>             </td>   
 
 <span class="k">if</span> <span class="nx">module</span><span class="o">?</span>
   <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">Generators</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">Generators</span><span class="p">.</span><span class="nx">english</span><span class="p">.</span><span class="nx">paragraphs</span><span class="p">(</span><span class="mi">5</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="s2">&quot;\n\n&quot;</span><span class="p">)</span>
 <span class="k">else</span>
   <span class="err">@</span><span class="nx">Generators</span> <span class="o">=</span> <span class="nx">Generators</span>
+
+<span class="k">if</span> <span class="nx">module</span><span class="o">?</span> <span class="o">and</span> <span class="o">not</span> <span class="nx">module</span><span class="p">.</span><span class="nx">parent</span><span class="o">?</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">Generators</span><span class="p">.</span><span class="nx">english</span><span class="p">.</span><span class="nx">paragraphs</span><span class="p">(</span><span class="mi">5</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="s2">&quot;\n\n&quot;</span><span class="p">)</span>
 
 </pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 
