@@ -854,5 +854,3 @@ if module?
   module.exports = Generators
 else
   @Generators = Generators
-
-console.log Generators.chorva.paragraphs(5).join("\n\n")
