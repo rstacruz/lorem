@@ -5,8 +5,10 @@
 <title>Rico's Filler text generator</title>
 <meta http-equiv="Content-Type"		content="text/html; charset=ISO-8859-1" />
 <meta http-equiv="Content-Language"	content="en-us" />
-<script type="text/javascript" src="script.js?1317044211"></script>
-<link rel="stylesheet" href="assets/style.css?1317046331" type="text/css" media="screen" charset="utf-8" />
+<script src='http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.1.7/underscore-min.js'></script>
+<script type="text/javascript" src="gen.js?1317110966"></script>
+<script type="text/javascript" src="script.js?1317110191"></script>
+<link rel="stylesheet" href="assets/style.css?1317110623" type="text/css" media="screen" charset="utf-8" />
 <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Yellowtail' rel='stylesheet' type='text/css'>
 <script type='text/javascript'>
@@ -79,10 +81,10 @@
         <div id="option-length" class="option-item">
         <label for="optLen">Length:</label>
         <select id="optLen">
-          <option value="0.01">sentence</option>
-          <option value="1" selected="1">short</option>
+          <option value="1">sentence</option>
+          <option value="230" selected="1">short</option>
           <!-- <option value="1.5">medium</option> -->
-          <option value="2">long</option>
+          <option value="400">long</option>
           <!-- <option value="2.7">massive</option> -->
           <!-- <option value="3.5">collosal</option> -->
         </select>
@@ -100,7 +102,11 @@
 		<a href="javascript:void(0);" id="optShowtags">&lsaquo;p&rsaquo; tags</a> |
 		<a href="javascript:void(0);" id="optSelect">Select all</a>
 	</div>
+</div>
 
+<div id='info'>
+  This was built by <a href='/'>Rico Sta. Cruz</a>. You should follow me on twitter: <a href="http://twitter.com/rstacruz">@rstacruz</a>.
+  Curious to see how this was built? View the annotated <a href='source/'>source code</a> (CoffeeScript).
 </div>
 </body>
 </html>
