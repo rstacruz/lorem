@@ -350,7 +350,7 @@
     EnglishGenerator.prototype.PRESET_PREPOS_PHRASE = EnglishGenerator.words(['at the moment', 'surprisingly', 'but then again', 'after that', 'indeed', 'but before that', 'in conclusion', 'alternatively', 'in the future', 'once more', 'again', 'but then', 'though', 'right now', 'once', 'since then']);
     EnglishGenerator.prototype.ADVERB = EnglishGenerator.words(['profusely', 'slyly', 'greatly', 'badly', 'sadly', 'nicely', 'madly', 'truly', 'clearly', 'equally', 'easily', 'mainly', 'fully', 'firmly', 'exactly', 'coldly', 'surely', 'nimbly', 'happily', 'harshly', 'gently', 'grandly', 'jerkily', 'softly', 'swiftly', 'quickly', 'slowly', 'unmanly', 'eagerly', 'smartly', 'sanely', 'indeed', 'definitely']);
     EnglishGenerator.prototype.ALTHOUGH = EnglishGenerator.words(['although', 'albeit', 'once', 'though', 'even', 'while being', 'as', 'with', 'after being', 'since being']);
-    EnglishGenerator.prototype.INDEED = EnglishGenerator.words(['indeed', 'really', 'very']);
+    EnglishGenerator.prototype.INDEED = EnglishGenerator.words(['indeed', 'really', 'very', 'which must be', 'and it ought to be']);
     EnglishGenerator.prototype.WHAT = EnglishGenerator.words(['what', 'who', 'why', 'when', 'where', 'how']);
     EnglishGenerator.prototype.WHOWHAT = EnglishGenerator.words(['what', 'who']);
     return EnglishGenerator;
