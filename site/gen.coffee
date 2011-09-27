@@ -5,6 +5,18 @@ _ = @_ or require 'underscore'
 
 # ----------------------------------------------------------------------------
 
+# ## How it works
+# Something about grammar trees. Read it up on Wikipedia:
+#
+# * [X-Bar theory](http://en.wikipedia.org/wiki/X-bar_theory)
+# * [Sentence diagram](http://en.wikipedia.org/wiki/Sentence_diagram)
+#
+# Each language is implemented as a class, with each class defining
+# the structures of each sentence element. Scroll down to
+# `EnglishGenerator` for the fun parts.
+
+# ----------------------------------------------------------------------------
+
 # ## Sham
 # A little shim to ensure that random picks are not repeated. This is used for
 # the `r()` helper.
@@ -795,7 +807,8 @@ class ChorvaGenerator extends TagalogGenerator
     'chaka', 'chipangga', 'thundercats', 'pagoda cold wave lotion',
     'shubos', 'tarush', 'kyoho', 'chabaka', 'kabog', 'bongga',
     'ganders', 'jutay', 'krung-krung', 'oblation', 'nakaka-lurkey',
-    'plastikada', 'shonga-shonga', 'Haggardo Versoza'
+    'plastikada', 'shonga-shonga', 'Haggardo Versoza', 'Bitter Ocampo',
+    'Stress Drilon'
   ]
     
   PRESET_PREPOS_PHRASE: @words [
@@ -813,9 +826,12 @@ class ChorvaGenerator extends TagalogGenerator
     '.', '!'
   ]
 
+  # ### SENTENCE
+  # The `sentence` element has been redefined to add exclamations, and
+  # to randomly make sentences end with exclamation points.
   SENTENCE: @randomize -> [
-    [1, 'EXCLAMATIONS']
-    [1, @phrase -> ['SENTENCE1', 'PUNCTUATION']]
+    [2, 'EXCLAMATIONS']
+    [5, @phrase -> ['SENTENCE1', 'PUNCTUATION']]
   ]
 
 # ----------------------------------------------------------------------------
