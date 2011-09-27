@@ -401,7 +401,7 @@ static smile
 
   <span class="nv">AN_ADJNOUN: </span><span class="o">-&gt;</span>
     <span class="nx">str</span> <span class="o">=</span> <span class="nx">join</span> <span class="err">@</span><span class="nx">ADJNOUN</span><span class="p">()</span>
-    <span class="k">if</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="s1">&#39;u&#39;</span><span class="p">].</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">str</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">if</span> <span class="s1">&#39;aoeui&#39;</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">str</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span>
       <span class="s2">&quot;an #{str}&quot;</span>
     <span class="k">else</span>
       <span class="s2">&quot;a #{str}&quot;</span>

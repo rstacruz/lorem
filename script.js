@@ -11,7 +11,7 @@ function btnGenerate_onClick()
 
   // Change the permalink
   if (gen == 'latin')
-    { delete window.location.hash; }
+    { window.location.hash = ''; }
   else
     { window.location.hash = '#' + gen; }
 

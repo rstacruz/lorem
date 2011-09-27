@@ -303,7 +303,7 @@
     EnglishGenerator.prototype.AN_ADJNOUN = function() {
       var str;
       str = join(this.ADJNOUN());
-      if (['a', 'e', 'i', 'o', 'u'].indexOf(str[0]) > -1) {
+      if ('aoeui'.indexOf(str[0]) > -1) {
         return "an " + str;
       } else {
         return "a " + str;
